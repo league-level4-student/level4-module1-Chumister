@@ -15,13 +15,54 @@ public class _00_Horoscope {
 	public static void main(String[] args) {
 		int h = JOptionPane.showOptionDialog(null, "Pick a zodiac", "Zodiac signs", 0,JOptionPane.INFORMATION_MESSAGE, null, Horo.values(), null);
 		
-		Horo data = Horo.Aquarius;
-		if (data == Horo.Aquarius) {
-			
+		switch(h) {
+		case 0:{
+			System.out.println("Aries");
+			break;
 		}
-		switch(data) {
-		case Aries:{
-			
+		case 1:{
+			System.out.println("Leo");
+			break;
+		}
+		case 2:{
+			System.out.println("Cancer");
+			break;
+		}
+		case 3:{
+			System.out.println("Pisces");
+			break;
+		}
+		case 4:{
+			System.out.println("Scorpio");
+			break;
+		}
+		case 5:{
+			System.out.println("Taurus");
+			break;
+		}
+		case 6:{
+			System.out.println("Sagittaurus");
+			break;
+		}
+		case 7:{
+			System.out.println("Gemini");
+			break;
+		}
+		case 8:{
+			System.out.println("Virgo");
+			break;
+		}
+		case 9:{
+			System.out.println("Libra");
+			break;
+		}
+		case 10:{
+			System.out.println("Capricorn");
+			break;
+		}
+		case 11:{
+			System.out.println("Aquarius");
+			break;
 		}
 		}
 	}
