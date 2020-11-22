@@ -60,7 +60,7 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 		panel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		window.add(panel);
-
+  
 		timer = new Timer(0, this);
 
 		window.pack();
@@ -115,8 +115,20 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//1. Use a switch statement on e.getKeyCode()
 		//   to determine which key was pressed.
 		switch (e.getKeyCode()) {
-		case 0:
+		case KeyEvent.VK_KP_UP:
+			snake.setDirection(Direction.UP);
+			break;
 			
+		case KeyEvent.VK_KP_DOWN:
+			snake.setDirection(Direction.DOWN);
+			break;
+		
+		case KeyEvent.VK_KP_RIGHT:
+			snake.setDirection(Direction.RIGHT);
+			break;
+			
+		case KeyEvent.VK_KP_LEFT:
+			snake.setDirection(Direction.LEFT);
 			break;
 
 		default:
@@ -127,25 +139,33 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		// direction accordingly
 		
 		// if the space key is pressed, call the snake's feed method
-		
+		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+			snake.feed();
+		}
 	}
 
 	private void setFoodLocation() {
 		//1. Create a new Location object that is set to a random location
-		
+		Random rand = new Random();
+
+		Location mono = new Location(rand.nextInt(15),rand.nextInt(12));
+				
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
-		
+		if(snake.isLocationOnSnake(mono)) {
+			
+		}
+		foodLocation=mono;
 	}
 
 	private void gameOver() {
 		
 		//1. stop the timer
-		
+		timer.stop();
 		//2. tell the user their snake is dead
-		
+		JOptionPane.showMessageDialog(null, "Your snake is dead");
 		//3. ask them if they want to play again.
-		
+		JOptionPane.showInputDialog(null, "Do you want to play again?");
 		//4. if they want to play again
 		//   reset the snake and the food and start the timer
 		//   else, exit the game
@@ -155,12 +175,13 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//1. update the snake
-
+		snake.update();
 		//2. if the snake is colliding with its own body 
 		//   or if the snake is out of bounds, call gameOver
 
