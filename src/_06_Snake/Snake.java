@@ -57,14 +57,13 @@ public class Snake {
 		//2a. Update each snake segment to the location of the segment 
 		//    in front of it.
 		
-		for (int i = 0; i < snake.size()-1; i--) {
-			snake.set(0, head);
+		for (int i = snake.size()-1; i > 0; i--) {
+			snake.get(i).setLocation(snake.get(i-1).getLocation());
+			
 		}
 		
 		//3. set the location of the head to the new location calculated in step 1
-		
-		
-
+		head.setLocation(new Location(x,y));
 		//4. set canMove to true
 		isLocationOnSnake(getHeadLocation());
 		canMove=true;
