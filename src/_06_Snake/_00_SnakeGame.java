@@ -90,10 +90,10 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 			
 			break;
 		case 1:
-			timer.setDelay(3);
+			timer.setDelay(600);
 			break;
 		case 2:
-			timer.setDelay(5);
+			timer.setDelay(1200);
 			break;
 		}
 		//3. start the timer
@@ -112,22 +112,23 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("keyPressed");
 		//1. Use a switch statement on e.getKeyCode()
 		//   to determine which key was pressed.
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_KP_UP:
+		case KeyEvent.VK_UP:
 			snake.setDirection(Direction.UP);
 			break;
 			
-		case KeyEvent.VK_KP_DOWN:
+		case KeyEvent.VK_DOWN:
 			snake.setDirection(Direction.DOWN);
 			break;
 		
-		case KeyEvent.VK_KP_RIGHT:
+		case KeyEvent.VK_RIGHT:
 			snake.setDirection(Direction.RIGHT);
 			break;
 			
-		case KeyEvent.VK_KP_LEFT:
+		case KeyEvent.VK_LEFT:
 			snake.setDirection(Direction.LEFT);
 			break;
 
@@ -155,7 +156,9 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		if(snake.isLocationOnSnake(mono)) {
 			setFoodLocation();
 		}
-		foodLocation=mono;
+		else {
+		 foodLocation=mono;
+		}
 	}
 
 	private void gameOver() {
@@ -165,12 +168,18 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. tell the user their snake is dead
 		JOptionPane.showMessageDialog(null, "Your snake is dead");
 		//3. ask them if they want to play again.
-		JOptionPane.showInputDialog(null, "Do you want to play again?");
+		String input = JOptionPane.showInputDialog(null, "Do you want to play again?");
 		//4. if they want to play again
 		//   reset the snake and the food and start the timer
-		
+
 		//   else, exit the game
-		snake.reset(null);
+		if (input.equals("yes")){
+			snake.reset(new Location(WIDTH / 2, HEIGHT / 2));
+			setFoodLocation();
+			timer.start();
+		}else {
+			System.exit(0);
+		}
 	}
 
 	@Override
@@ -185,6 +194,9 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		snake.update();
 		//2. if the snake is colliding with its own body 
 		//   or if the snake is out of bounds, call gameOver
+		if (snake.isOutOfBounds()) {
+			gameOver();
+		}
 		if (snake.isHeadCollidingWithBody()) {
 			gameOver();
 		}

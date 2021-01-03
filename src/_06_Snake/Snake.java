@@ -63,9 +63,10 @@ public class Snake {
 		}
 		
 		//3. set the location of the head to the new location calculated in step 1
-		head.setLocation(new Location(x,y));
+		head.setLocation(new Location(head.getLocation().x+x,head.getLocation().y+y));
 		//4. set canMove to true
-		isLocationOnSnake(getHeadLocation());
+		System.out.println(head.getLocation().x);
+		System.out.println( head.getLocation().y);
 		canMove=true;
 	}
 
@@ -73,21 +74,22 @@ public class Snake {
 	public void setDirection(Direction d) {
 		//1. set the current direction equal to the passed in Direction only if canMove is true.
 		//   set canMove equal to false.
-		if (canMove) {
-			if (currentDirection==Direction.UP&&d!=Direction.DOWN) {
+		if (canMove==true) {
+			if (currentDirection==Direction.UP && d!=Direction.DOWN) {
 				currentDirection = d;
 			}
-			else if (currentDirection==Direction.LEFT&&d!=Direction.RIGHT) {
+			else if (currentDirection==Direction.LEFT && d!=Direction.RIGHT) {
 				currentDirection = d;
 			}
-			else if (currentDirection==Direction.RIGHT&&d!=Direction.LEFT) {
+			else if (currentDirection==Direction.RIGHT && d!=Direction.LEFT) {
 				currentDirection = d;
 			}
-			else if (currentDirection==Direction.DOWN&&d!=Direction.UP) {
+			else if (currentDirection==Direction.DOWN && d!=Direction.UP) {
 				currentDirection = d;
 			}
+			System.out.println(currentDirection+"mine");
 		}
-	
+		
 		//   make sure the snake cannot completely reverse directions.
 		
 	}
@@ -96,7 +98,7 @@ public class Snake {
 		//1. clear the snake
 		snake.clear();
 		//2. set the location of the head
-		snake.set(0, head);
+		head.setLocation(loc);
 		//3. add the head to the snake
 		snake.add(head);
 	}
@@ -104,10 +106,12 @@ public class Snake {
 	public boolean isOutOfBounds() {
 		//1. complete the method so it returns true if the head of the snake is outside of the window
 		//   and false otherwise
-		if (head.getLocation().x<0 && head.getLocation().y<0) {
+		if (head.getLocation().x<0 || head.getLocation().y<0|| head.getLocation().x>_00_SnakeGame.WIDTH||head.getLocation().y>_00_SnakeGame.HEIGHT) {
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 	
 	public boolean isHeadCollidingWithBody() {
